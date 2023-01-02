@@ -32,10 +32,10 @@ app.get("/api/:date", (req, res) => {
   let unix;
   if (regex.test(req.params.date)) {
     date = new Date(req.params.date).toUTCString();
-    unix = Math.floor(Date.parse(date));
+    unix = Number(Math.floor(Date.parse(date)));
   } else if (regex2.test(req.params.date)){
-    unix = req.params.date;
-    date = new Date(unix * 1000).toUTCString();
+    unix = Number(req.params.date);
+    date = new Date(unix).toUTCString();
   } else {
     res.json({ error : "Invalid Date" });
     return;
