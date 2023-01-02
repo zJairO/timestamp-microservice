@@ -26,14 +26,15 @@ app.get("/api/hello", function (req, res) {
 
 // date api endpoint
 app.get("/api/:date", (req, res) => {
-  let regex = new RegExp(/^(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)$/);
-  let regex2 = new RegExp(/^[0-9]{13}$/);
+  //let regex = new RegExp(/^(19[0-9]{2}|2[0-9]{3})-(0[1-9]|1[012])-([123]0|[012][1-9]|31)$/);
+  //let regex = new RegExp();
+  let regex = new RegExp(/^[0-9]{13}$/);
   let date;
   let unix;
-  if (regex.test(req.params.date)) {
+  if (Date.parse(req.params.date)) {
     date = new Date(req.params.date).toUTCString();
     unix = Number(Math.floor(Date.parse(date)));
-  } else if (regex2.test(req.params.date)){
+  } else if (regex.test(req.params.date)){
     unix = Number(req.params.date);
     date = new Date(unix).toUTCString();
   } else {
